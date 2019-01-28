@@ -1,0 +1,28 @@
+{
+  "name": "facenote-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Christian",
+    "email": "christianahvilla@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.1.13",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts"
+}
