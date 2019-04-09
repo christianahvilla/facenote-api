@@ -1,0 +1,36 @@
+User: {
+    _id: id,
+    Email: string,
+    PasswordHash: string,
+    Name: string,
+    Bio: strig,
+    ProfileImage: id,
+    Friends:[id, ...]
+    FriendRequest: [id, ...]
+}
+
+Post: {
+    _id: id,
+    Text: string,
+    Image: id,
+    Author:{
+        _id: id,
+        Name: string,
+        ProfileImage: id
+    },
+    Comments: {
+        _id: id,
+        Text: string,
+        Author:{
+            _id: id,
+            Name: string,
+            ProfileImage: id
+        },
+    }
+}
+
+Image: {
+    _id: id,
+    Data: Blob,
+    Extension: string
+}
