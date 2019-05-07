@@ -10,14 +10,18 @@ interface RequestWithUser extends Request {
 
 export function isAuthenticated(req: RequestWithUser, res: Response, next: NextFunction): void {
     const token: any = req.headers['x-access-token'];
+
     if (token) {
         try {
             const user: object | string = jwt.verify(token, app.get('secret'));
+
             req.user = user;
+
             return next();
         } catch (error) {
             return next(new HttpError(401, http.STATUS_CODES[401]));
         }
     }
+
     return next(new HttpError(400, 'No token provided'));
 }

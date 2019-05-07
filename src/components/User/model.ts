@@ -9,7 +9,9 @@ export interface IUserModel extends Document {
     password: string;
     bio: string;
     profileImage: Schema.Types.ObjectId;
+    // tslint:disable-next-line:prefer-array-literal
     friends: Array<Schema.Types.ObjectId>;
+    // tslint:disable-next-line:prefer-array-literal
     frienRequests: Array<Schema.Types.ObjectId>;
     tokens: AuthToken[];
     comparePassword: (password: string) => Promise<boolean>;
@@ -54,6 +56,7 @@ const UserSchema: Schema = new Schema({
 UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
     try {
         const match: boolean = await bcrypt.compare(candidatePassword, this.password);
+
         return match;
     } catch (error) {
         return error;

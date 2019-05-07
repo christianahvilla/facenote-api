@@ -9,7 +9,7 @@ import { sendHttpErrorModule } from '../error/sendHttpError';
 
 
 export function configure(app: express.Application): void {
-    app.use(bodyParser.urlencoded({extended: false}));
+    app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.use(compression());
