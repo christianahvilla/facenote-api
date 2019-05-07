@@ -1,36 +1,44 @@
-User: {
-    _id: id,
-    Email: string,
-    PasswordHash: string,
-    Name: string,
-    Bio: strig,
-    ProfileImage: id,
-    Friends:[id, ...]
-    FriendRequest: [id, ...]
-}
-
-Post: {
-    _id: id,
-    Text: string,
-    Image: id,
-    Author:{
-        _id: id,
-        Name: string,
-        ProfileImage: id
+{
+    "Users":
+    {
+        "_id": "uuid",
+        "Email": "string",
+        "PasswordHash": "string",
+        "Name": "string",
+        "Bio": "strig",
+        "ProfileImage": "uuid",
+        "Friends":[],
+        "FriendRequest": []
     },
-    Comments: {
-        _id: id,
-        Text: string,
-        Author:{
-            _id: id,
-            Name: string,
-            ProfileImage: id
-        },
-    }
-}
 
-Image: {
-    _id: id,
-    Data: Blob,
-    Extension: string
+    "Post":
+    {
+        "_id": "uuid",
+        "Text": "string",
+        "Image": "uuid",
+        "Author":
+        {
+            "_id": "uuid",
+            "Name": "string",
+            "ProfileImage": "uuid"
+        },
+        "Comments":
+        {
+            "_id": "uuid",
+            "Text": "string",
+            "Author":
+            {
+                "_id": "uuid",
+                "Name": "string",
+                "ProfileImage": "uuid"
+            }
+        }
+    },
+
+    "Image":
+    {
+        "_id": "uuid",
+        "Data": "Blob",
+        "Extension": "string"
+    }
 }
