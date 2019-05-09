@@ -9,9 +9,7 @@ export interface IUserModel extends Document {
     password: string;
     bio: string;
     profileImage: Schema.Types.ObjectId;
-    // tslint:disable-next-line:prefer-array-literal
     friends: Array<Schema.Types.ObjectId>;
-    // tslint:disable-next-line:prefer-array-literal
     frienRequests: Array<Schema.Types.ObjectId>;
     tokens: AuthToken[];
     comparePassword: (password: string) => Promise<boolean>;

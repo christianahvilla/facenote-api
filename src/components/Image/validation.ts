@@ -13,14 +13,15 @@ class ImageValidation extends Validation {
             extension: Joi.string().required(),
             data: Joi.object().required()
         });
+
         return Joi.validate(data, schema);
     }
 
-    
     get(data: { id: string }): Joi.ValidationResult<{id: string}> {
         const schema: Joi.Schema = Joi.object().keys({
             id: this.customJoi.objectId().required()
         });
+
         return Joi.validate(data, schema);
     }
 
@@ -28,6 +29,7 @@ class ImageValidation extends Validation {
         const schema: Joi.Schema = Joi.object().keys({
             id: this.customJoi.customJoi().required()
         });
+
         return Joi.validate(data, schema);
     }
 }

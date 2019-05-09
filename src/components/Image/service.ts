@@ -2,16 +2,20 @@ import ImageModel, { IImageModel } from './model';
 import ImageValidation from './validation';
 import { IImageService } from './interface';
 import { Types } from 'mongoose';
+import * as Joi from 'joi';
 
 const ImageService: IImageService = {
 
     async insert(image: IImageModel): Promise<IImageModel> {
         try {
-            const validate = ImageValidation.create(image);
+            const validate: Joi.ValidationResult<IImageModel> = ImageValidation.create(image);
+
             if (validate.error) {
                 throw new Error(validate.error.message);
             }
+            // tslint:disable-next-line:typedef
             const imageObj = await ImageModel.create(image);
+
             return imageObj;
         } catch (error) {
             throw new Error(error.message);
@@ -20,10 +24,11 @@ const ImageService: IImageService = {
 
     async findOne(id: string): Promise<IImageModel> {
         try {
-            const validate = ImageValidation.get({id});
+            const validate: Joi.ValidationResult<{id: string}> = ImageValidation.get({ id });
             if (validate.error) {
                 throw new Error(validate.error.message);
             }
+
             return await ImageModel.findOne({
                 _id: Types.ObjectId(id)
             });
@@ -33,9 +38,9 @@ const ImageService: IImageService = {
     },
 
     async remove(id: string): Promise<boolean> {
-        var success = false;
+        let success:boolean = false;
         try {
-            const validate = ImageValidation.remove({id});
+            const validate: Joi.ValidationResult <{id: string}> = ImageValidation.remove({ id });
             if (validate.error) {
                 throw new Error(validate.error.message);
             }
@@ -46,6 +51,7 @@ const ImageService: IImageService = {
         } catch (error) {
             throw new Error(error.message);
         }
+
         return success;
     }
 };

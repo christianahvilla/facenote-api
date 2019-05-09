@@ -23,7 +23,8 @@ abstract class Validation {
                         options
                     );
                 }
-                return value; 
+
+                return value;
             }
         });
     }

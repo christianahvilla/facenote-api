@@ -7,7 +7,8 @@ const AuthService: IAuthService = {
 
     async createUser(body: IUserModel): Promise <IUserModel> {
         try {
-            const validate = AuthValidation.createUser(body);
+            const validate: Joi.ValidationResult<IUserModel> = AuthValidation.createUser(body);
+
             if (validate.error) {
                 throw new Error(validate.error.message);
             }
@@ -22,15 +23,17 @@ const AuthService: IAuthService = {
                 throw new Error('This email already exists');
             }
             const saved: IUserModel = await user.save();
+
             return saved;
         } catch (error) {
             throw new Error(error);
         }
     },
-    
+
     async getUser(body: IUserModel): Promise <IUserModel> {
         try {
-            const validate = AuthValidation.getUser(body);
+            const validate: Joi.ValidationResult<IUserModel> = AuthValidation.getUser(body);
+
             if (validate.error) {
                 throw new Error(validate.error.message);
             }

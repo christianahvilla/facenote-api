@@ -4,6 +4,7 @@ import * as jwtConfig from '../config/middleware/jwtAuth';
 import * as swaggerUi from 'swagger-ui-express';
 import AuthRouter from './AuthRouter';
 import ImageRouter from './ImageRouter';
+import PostRouter from './PostRouter';
 let swaggerDoc: Object;
 
 try {
@@ -20,6 +21,7 @@ export function init(app: express.Application): void {
     const router: express.Router = express.Router();
 
     app.use('/image', jwtConfig.isAuthenticated, ImageRouter);
+    app.use('/post', jwtConfig.isAuthenticated, PostRouter);
     app.use('/auth', AuthRouter);
     if (swaggerDoc) {
         app.use('/docs', swaggerUi.serve);

@@ -8,15 +8,17 @@ import app from '../../config/server/server';
 export async function signup(req: Request, res: Response, next: NextFunction): Promise < void > {
     try {
         const user: IUserModel = await AuthService.createUser(req.body);
+
         const token: string = jwt.sign(
             { email: user.email },
             app.get('secret'),
             { expiresIn: '60m' }
         );
+
         res.json({
             status: 200,
             logged: true,
-            token: token,
+            token: { token },
             message: 'Sign in successfull'
         });
     } catch (error) {
@@ -32,16 +34,19 @@ export async function signup(req: Request, res: Response, next: NextFunction): P
 
 export async function login(req: Request, res: Response, next: NextFunction): Promise < void > {
     try {
+        // tslint:disable-next-line:typedef
         const user = await AuthService.getUser(req.body);
+
         const token: string = jwt.sign(
             { email: user.email },
             app.get('secret'),
             { expiresIn: '60m' }
         );
+
         res.json({
             status: 200,
             logged: true,
-            token: token,
+            token: { token },
             message: 'Sign in successfull'
         });
     } catch (error) {

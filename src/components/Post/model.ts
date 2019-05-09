@@ -1,45 +1,30 @@
 import * as connections from '../../config/connection/connection';
 import { Document, Schema } from 'mongoose';
-import { ObjectID } from 'bson';
+import { NextFunction } from 'express';
 
 export interface IPostModel extends Document {
     _id: string;
-    email: string;
-    password: string;
-    bio: string;
-    profileImage: Schema.Types.ObjectId;
-    // tslint:disable-next-line:prefer-array-literal
-    friends: Array<Schema.Types.ObjectId>;
-    // tslint:disable-next-line:prefer-array-literal
-    frienRequests: Array<Schema.Types.ObjectId>;
-    comparePassword: (password: string) => Promise<boolean>;
+    text: string;
+    image: string;
+    author: Author;
+    comments: Array<Schema.Types.ObjectId>;
 }
 
-const Author: Schema = new Schema(
-    {
-        _id: String,
-        name: String,
-        profileImage: String
-    }
-);
-
-const Comment: Schema = new Schema(
-    {
-        _id: String,
-        text: String,
-        author: Author
-    },
-    {
-        collection: 'Comments',
-        versionKey: false
-    });
+type Author = {
+    _id: String,
+    name: String,
+    profileImage: String
+};
 
 const PostSchema: Schema = new Schema(
     {
         text: String,
         image: String,
         author: Object,
-        comments: Array
+        comments: [{
+            type: Schema.Types.ObjectId,
+            ref: 'CommentModel'
+        }]
     },
     {
         collection: 'Posts',
